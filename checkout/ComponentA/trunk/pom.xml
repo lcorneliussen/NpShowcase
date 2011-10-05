@@ -10,7 +10,6 @@
     <groupId>NpShowcase</groupId>
     <artifactId>NpShowcase-Parent</artifactId>
     <version>1-SNAPSHOT</version>
-    <relativePath>..\pom.xml</relativePath>
   </parent>
 
   <artifactId>NpShowcase.ComponentA</artifactId>
