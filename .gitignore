@@ -44,3 +44,4 @@ Thumbs.db
 !libs/*/[Bb]in/
 
 *.ncb
+*.bak
