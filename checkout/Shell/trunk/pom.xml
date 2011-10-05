@@ -17,9 +17,17 @@
   <version>1.0.0-SNAPSHOT</version>
 
   <name>NpShowcase :: Shell :: Parent</name>
+  
+  <properties>
+    <componentName>Shell</componentName>
+  </properties>
 
   <modules>
     <module>NpShowcase.Shell.Console</module>
-  </modules>
+  </modules>  
+  
+  <scm>
+    <connection>scm:svn:${svnRepo}/${componentName}/trunk</connection>
+  </scm>
 
 </project>

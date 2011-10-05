@@ -17,11 +17,19 @@
   <version>1.0.0-SNAPSHOT</version>
 
   <name>NpShowcase :: Component B :: Parent</name>
+  
+  <properties>
+    <componentName>ComponentB</componentName>
+  </properties>
 
   <modules>
     <module>NpShowcase.ComponentB.Contract</module>
     <module>NpShowcase.ComponentB.Implementation</module>
     <module>NpShowcase.ComponentB.Shell</module>
-  </modules>
+  </modules>  
+  
+  <scm>
+    <connection>scm:svn:${svnRepo}/${componentName}/trunk</connection>
+  </scm>
 
 </project>
