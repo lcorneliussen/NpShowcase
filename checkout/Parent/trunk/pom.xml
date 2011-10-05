@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>NpShowcase</groupId>
+  <artifactId>NpShowcase-Parent</artifactId>
+  <version>1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>NpShowcase :: Parent</name>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.npanday.plugins</groupId>
+          <artifactId>maven-compile-plugin</artifactId>
+          <version>1.4.0-incubating</version>
+          <extensions>true</extensions>
+          <configuration>
+            <frameworkVersion>4.0</frameworkVersion>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.npanday.plugins</groupId>
+          <artifactId>maven-test-plugin</artifactId>
+          <version>1.4.0-incubating</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>2.2</version>
+          <executions>
+            <execution>
+			  <!-- 
+			  In order to work with Visual Studio,
+			  all references need to be copied to
+			  the project folder.
+			  -->
+              <id>preresolve-dependencies</id>
+              <phase>initialize</phase>
+              <goals>
+                <goal>copy-dependencies</goal>
+              </goals>
+              <configuration>
+                <outputDirectory>${project.build.directory}\.references</outputDirectory>
+                <stripVersion>true</stripVersion>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+  
+  <profiles>
+    <profile>
+	  <id>build-all</id>
+	  <modules>
+	    <module>..\..\Infrastructure\trunk</module>
+		<module>..\..\Shell\trunk</module>
+		<module>..\..\ComponentA\trunk</module>
+		<module>..\..\ComponentB\trunk</module>
+	  </modules>
+	</profile>
+  </profiles>
+
+  <repositories>
+    <repository>
+      <id>stage-repo</id>
+      <url>file://C:/Workbench/NpShowcase/mvn-repository</url>
+    </repository>
+  </repositories>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>stage-repo</id>
+      <url>file://C:/Workbench/NpShowcase/mvn-repository</url>
+    </snapshotRepository>
+  </distributionManagement>
+</project>
