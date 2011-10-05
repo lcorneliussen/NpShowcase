@@ -1,23 +1,23 @@
+# Project-Specific
+mvn-repository/
+svn-repository/
+.svn
+branches
+tags
+
+# Maven stuff
+target/
+*.releaseBackup
+release.properties
+
 # Visual Studio Ignores
 [Bb]in/
 obj/
-
-target/
-
-mvn-repository/
-svn-repository/
-
-.svn
-
+.vs10x
+*.vs10x
 *.sln.cache
 *.suo
 *.user
-
-*.ncb
-
-# Visual Studio Extensions Ignores
-.vs10x
-*.vs10x
 
 # Resharper Ignores
 _ReSharper.*/
@@ -42,3 +42,5 @@ lint.db
 # Misc Ignores
 Thumbs.db
 !libs/*/[Bb]in/
+
+*.ncb

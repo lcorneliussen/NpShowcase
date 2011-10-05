@@ -35,8 +35,6 @@ mkdir $mvnRepo | out-null
 echo "# creating svn-repository"
 svnadmin create $svnRepo
 
-exit
-
 echo "# checking out from svn-repository"
 svn checkout $svnurl $checkout
 
