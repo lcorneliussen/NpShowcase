@@ -1,3 +1,7 @@
+param (
+    [switch] $cleanOnly
+    )
+
 cls
 
 $root = Split-Path (Resolve-Path $myInvocation.MyCommand.Path);
@@ -20,9 +24,12 @@ if (test-path $svnRepo -pathType container) {
    Remove-Item -r -force
 }
 
-echo "# deleting tags and branches in $checkout"
-  gci $checkout -include tags,branches -r -force | 
-   Remove-Item -r -force
+$tagsOrBranches = gci $checkout -include tags,branches -r -force
+if ($tagsOrBranches) {
+  echo "# deleting tags and branches in $checkout"
+  $tagsOrBranches | 
+    Remove-Item -r -force
+}
 
 # Cleanup staging Maven-Repository stuff
 if (test-path $mvnRepo -pathType container) {
@@ -36,32 +43,47 @@ if (test-path $localRepoNpShowcase -pathType container) {
   del $localRepoNpShowcase -r -force
 }
 
-echo "### Setup ###"
-echo ""
-echo "# creating mvn-repository"
-mkdir $mvnRepo | out-null
+echo "# clean done successfully"
+    
+if (!$cleanOnly) {
+    echo ""
+    echo ""
+    echo "### Setup ###"
+    echo ""
+    
+    echo "# checking prerequisites"
+    if (0 -eq $(git status $checkout | grep -c "nothing to commit")){
+      git status $checkout
+      throw "Please commit or revert all changes in checkout"
+    }
 
-# Set up SVN
-echo "# creating svn-repository"
-svnadmin create $svnRepo
+    echo "# creating mvn-repository"
+    mkdir $mvnRepo | out-null
 
-echo "# checking out from svn-repository"
-svn checkout $svnurl $checkout
+    # Set up SVN
+    echo "# creating svn-repository"
+    svnadmin create $svnRepo
 
-echo "# switch to checkout dir"
-cd $checkout
+    echo "# checking out from svn-repository"
+    svn checkout $svnurl $checkout
 
-echo "Create branch and tag base dirs"
-gci $checkout | 
-   ? {$_.PsIsContainer} | 
-   %{ 
-     mkdir $(Join-Path $_ branches) | out-null
-     mkdir $(Join-Path $_ tags) | out-null
-   }
+    echo "# switch to checkout dir"
+    cd $checkout
 
-echo "initially commit everything" 
-svn add *
-svn commit -m "Initial commit"
-svn status
+    echo "Create branch and tag base dirs"
+    gci $checkout |
+       ? {$_.PsIsContainer} | 
+       %{ 
+         mkdir $(Join-Path $_ branches) | out-null
+         mkdir $(Join-Path $_ tags) | out-null
+       }
+
+    echo "initially commit everything" 
+    svn add *
+    svn commit -m "Initial commit"
+    svn status
+    
+    echo "# setup done successfully"
+}
 
 cd $root
