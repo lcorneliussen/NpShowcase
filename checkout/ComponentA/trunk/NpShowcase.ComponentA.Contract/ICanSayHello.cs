@@ -1,6 +1,6 @@
 ﻿namespace NpShowcase.ComponentA.Contract
 {
-    public interface ISomeComponentALogic
+    public interface ICanSayHello
     {
         string SayHello();
     }

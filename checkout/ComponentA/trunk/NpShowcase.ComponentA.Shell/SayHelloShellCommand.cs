@@ -5,7 +5,7 @@ namespace NpShowcase.ComponentA.Shell
 {
     public class SayHelloShellCommand : Infrastructure.Console.IConsoleCommand
     {
-        public ISomeComponentALogic ComponentALogic { get; set; }
+        public ICanSayHello ComponentALogic { get; set; }
 
         public string Name
         {

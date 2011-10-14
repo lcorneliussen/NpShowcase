@@ -7,7 +7,7 @@ namespace NpShowcase.ComponentB.Shell
 {
     public class BroadCastAShellCommand : IConsoleCommand
     {
-        public ISomeComponentBLogic ComponentBLogic { get; set; }
+        public ICanBroadcastA ComponentBLogic { get; set; }
 
         public string Name
         {

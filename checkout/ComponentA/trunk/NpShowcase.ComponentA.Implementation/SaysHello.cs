@@ -2,7 +2,7 @@
 
 namespace NpShowcase.ComponentA.Implementation
 {
-    public class SomeComponentALogic : ISomeComponentALogic
+    public class SaysHello : ICanSayHello
     {
         public string SayHello()
         {

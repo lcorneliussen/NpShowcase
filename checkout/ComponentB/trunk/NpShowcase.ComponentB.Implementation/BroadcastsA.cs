@@ -4,12 +4,12 @@ using NpShowcase.ComponentB.Contract;
 
 namespace NpShowcase.ComponentB.Implementation
 {
-    public class SomeComponentBLogic : ISomeComponentBLogic
+    public class BroadcastsA : ICanBroadcastA
     {
         /// <summary>
         ///   Please use injection!
         /// </summary>
-        public ISomeComponentALogic ComponentALogic { get; set; }
+        public ICanSayHello ComponentALogic { get; set; }
 
         public string BroadcastWhatASays(int times)
         {

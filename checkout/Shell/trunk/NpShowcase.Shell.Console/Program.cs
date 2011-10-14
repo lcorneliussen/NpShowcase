@@ -34,8 +34,8 @@ namespace NpShowcase.Shell.Console
 
         private static IEnumerable<IConsoleCommand> doWhatIoCShouldDo()
         {
-            var a = new SomeComponentALogic();
-            var b = new SomeComponentBLogic { ComponentALogic = a };
+            var a = new SaysHello();
+            var b = new BroadcastsA { ComponentALogic = a };
 
             yield return new SayHelloShellCommand { ComponentALogic = a };
             yield return new BroadCastAShellCommand { ComponentBLogic = b };
